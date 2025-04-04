@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEMPREPCORNER</title>
+    <style>
+    html, body {
+    overflow-x: hidden;
+    }
+       body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Logo Container */
+.logo-container img {
+    max-width: 120%; /* Ensures the logo scales on smaller screens */
+    height: auto;
+    display: block;
+    padding-left: 3%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1565c0;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-weight: bold;
+    background-color: rgb(0, 128, 255)
+}
+
+.sidebar ul li a:hover {
+    background: #e51e3f;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 270px; /* Ensures space for the sidebar */
+    flex: 1;
+    background-color: #f0f0f0;
+    min-height: 20vh;
+    width: calc(100% - 270px);
+    box-sizing: border-box;
+}
+
+/* Marquee Container */
+.marquee-container {
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Content Box */
+.content-box {
+    background: rgb(4, 229, 229);
+    padding: 40px;
+    /* border-radius: 40px; */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Subjects Container */
+.subjects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Subject Cards */
+.subject-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 45%;
+    text-align: center;
+}
+
+/* PDF Links */
+.pdf-links a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background: #1e88e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Responsive Image */
+.responsive-img {
+    max-width: 100%; /* Ensures the image scales within its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Full width on small screens */
+        height: auto;
+        position: relative; /* Removes fixed positioning on mobile */
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .subject-card {
+        width: 90%; /* Takes more space on smaller screens */
+    }
+    
+    .marquee-container {
+        font-size: 16px; /* Smaller font size on small screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-img {
+        max-width: 80%; /* Limits image width on large screens */
+    }
+}
+
+.image-wrapper {
+    margin: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.animated-image {
+    width: 300px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+}
+
+.animated-image:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-animation.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.interactive-content {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Start hidden */
+    transform: translateY(50px); /* Start slightly below */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.interactive-content.visible {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.animated-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .animated-video {
+            border: none;
+        }
+        .video-container {
+        width: 80%; /* Decrease width */
+        height: 400px; /* Increase height */
+        max-width: 1000px; /* Prevent it from getting too wide */
+        margin: auto; /* Center it */
+    }
+
+    .video-container iframe {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px; /* Optional: Add rounded corners */
+    }
+
+
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://i.postimg.cc/D0YSbW95/Ashoka-logo.jpg" alt="Ashoka Logo">
+    </div>
+    
+    <div class="main-content">
+        <div class="marquee-container">
+             <marquee direction="LEFT" width="100%">
+        WELCOME TO ASHOKA WOMENS ENGINEERING COLLEGE!
+      </marquee>
+ <div class="sidebar">
+        <h2>ASKW MCA Materials</h2>
+        <p style="color: rgb(239, 239, 19)">click on below buttons to see materials and model papers.......</p>
+        <ul>
+            <li><a href="#" id="syllabus-link">MCA Syllabus</a></li>
+            <li><a href="#" id="sem1-link">I Semester</a></li>
+            <li><a href="#" id="sem2-link">II Semester</a></li>
+            <li><a href="#" id="sem3-link">III Semester</a></li>
+            <li><a href="#" id="sem4-link">IV Semester</a></li>
+            <li><a href="#" id="Model Papers-link">Model Papers</a></li>
+        </ul>
+    </div>
+
+        </div>
+        
+        
+        <div id="content-area" class="content-box">
+            
+            <!-- <h2>Select an option from the sidebar to view materials.......</h2> -->
+            <h1 style="color: blue"><i>About Ashoka Women's Engineering College</i></h1>
+        <h3 style="color: rgb(224, 82, 35)">
+            Established with a vision to empower women through quality technical education, 
+            Ashoka Women's Engineering College is a premier institution dedicated to fostering innovation, academic excellence, and leadership.
+        </h3>
+        <div class="video-container">
+            <iframe class="animated-video"
+                src="https://www.youtube.com/embed/2DqioH-erRw" 
+                frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+        
+        <section class="image-container">
+            <div class="image-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFg8F6z8ffEKtlKYSeZhh-lm4QIJMDJJ5cg&s" alt="Placeholder Image 1" class="animated-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8dZF-aNneeqEFmvAf8h6aUYENenAhBdJGEw&s" alt="Placeholder Image 2" class="animated-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://aptcareercounsellors.allegiance-educare.in/storage/uploads/colleges/16994267565.jpeg" alt="Placeholder Image 3" class="animated-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://aptcareercounsellors.allegiance-educare.in/storage/uploads/colleges/1699426757Seminar-Hall-1.jpeg" alt="Placeholder Image 4" class="animated-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://www.ashokacollege.in/wp-content/uploads/2023/09/1.jpg" alt="Placeholder Image 5" class="animated-image">
+            </div>
+            <div class="image-wrapper">
+                <img src="https://www.ashokacollege.in/wp-content/uploads/2022/02/T-P-HANDBOOK-1-1000x550.png" alt="Placeholder Image 6" class="animated-image">
+            </div>
+            <!-- <div class="image-wrapper">
+                <img src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=" alt="Placeholder Image 7" class="animated-image">
+            </div> -->
+        </section>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById("content-area");
+
+            function loadContent(title, subjects) {
+    let contentHtml = `<h2>${title}</h2><div class='subjects-container'>`;
+    subjects.forEach(subject => {
+        contentHtml += `<div class='subject-card'><h3>${subject.name}</h3><div class='pdf-links'>`;
+        subject.units.forEach(unit => {
+            contentHtml += `<a href="${unit.url}" target="_blank">${unit.text}</a>`;
+        });
+        contentHtml += `</div></div>`; // Removed Full Subject Material link
+    });
+    contentHtml += `</div>`;
+    contentArea.innerHTML = contentHtml;
+}
+
+
+           function addSemesterListener(id, semesterTitle, subjects) {
+    document.getElementById(id).addEventListener("click", () => {
+        loadContent(semesterTitle, subjects);
+    });
+}
+// Example for MCA Syllubus Semester
+addSemesterListener("syllabus-link", "ALL Semester Syllabus..", [
+    {
+        name: "SEMESTER-I",
+        units: [
+            { text: "Mathematical Foundation Of Computer Science(MFCS)", url: "https://drive.google.com/file/d/1Xoj3vvf-r_QDOW8r6dPNMgktVpQV2VWb/view?usp=sharing" },
+            { text: "Software Engineering(SE)", url: "https://drive.google.com/file/d/1iukOFY2qzHycH1TLBPVKhzUwCOZq4dxc/view?usp=sharing" },
+            { text: "Computer Organization & Architecture(COA)", url: "https://drive.google.com/file/d/1YR-WmDygxpfmL3DhmB35ljnJMnfIdfKR/view?usp=sharing" },
+            { text: "Data Structure(DS)", url: "https://drive.google.com/file/d/1VVwjPLSdHYOhqpWV0mKKheoFRcrGNt9I/view?usp=sharing" },
+            { text: "Database Management System(DBMS)", url: "https://drive.google.com/file/d/1br9K2tGBFReJvKhIT9AewdycOd1S4hF8/view?usp=sharing" },
+            { text: "Research Methodology and IPR(RM&IPR)", url: "https://drive.google.com/file/d/1a4-oarzq0G22oy4bSN2queK2alXqQDwW/view?usp=sharing" },
+            { text: "Software Engineering Laboratory", url: "https://drive.google.com/file/d/16tmUAU2EQvcj95EKnKhaluyRJYnd_412/view?usp=sharing" },
+            { text: "Data Structures Using C Laboratory", url: "https://drive.google.com/file/d/1ivww_aiCZ07QUaEIATzHxR4wRI_OSdA4/view?usp=sharing" },
+            { text: "Database Management System Laboratory", url: "https://drive.google.com/file/d/12BTrH7F5SorDccmKGt5ps9yrW4UUJtJH/view?usp=sharing" },
+            { text: "SEMESTER-1(ALL SUBJECTS) Syllabus ", url: "https://drive.google.com/file/d/17CCZ1UW-SQwSJ_IJfqCE7kHKC4Wvp5O7/view?usp=sharing" }
+        ],
+        
+    },
+    {
+        name: "SEMESTER-II",
+        units: [
+            { text: "Operating System(OS)", url: "https://drive.google.com/file/d/1kWqEM54eKmzl1CR5ZV2gRZp33UqLF5kE/view?usp=sharing" },
+            { text: "Data Science With Python(DSP)", url: "https://drive.google.com/file/d/1O7S7n5W6s1fJ6FiWG4T0AOCd-IdkA6kh/view?usp=sharing" },
+            { text: "Computer Networks(CN)", url: "https://drive.google.com/file/d/1u1m-Tx25a4UsLhShYREars8nLlydNx2z/view?usp=sharing" },
+            { text: "Software Testing Methodologies(STM)", url: "https://drive.google.com/file/d/16GtyGCcExbQCabCS4H4c2shh7XReziZt/view?usp=sharing" },
+            { text: "Cloud Computing(CC)", url: "https://drive.google.com/file/d/17Ei_2kQtwdCb5nJD1XTHkna_pcEIWNjS/view?usp=sharing" },
+            { text: "Operating System Laboratory", url: "https://drive.google.com/file/d/1Ld3XF-EbAhYHrH4qf8NkvDPM_eD__pUW/view?usp=sharing" },
+            { text: "Data Science Laboratory", url: "https://drive.google.com/file/d/1GawQ32atg00cbkpRASJJwq87cWtKGGq1/view?usp=sharing" },
+            { text: "Computer Networks Laboratory", url: "https://drive.google.com/file/d/1Flebq5_pRCwy2TIiY_wWt2pRbhpJSswg/view?usp=sharing" },
+            { text: "Exploratory Data Analytics With Python(EDAP)", url: "https://drive.google.com/file/d/1b15bZP21TYWRyp2LEwCzw-WwAhufmF7k/view?usp=sharing" },
+            { text: "SEMESTER-2(ALL SUBJECTS) Syllabus ", url: "https://drive.google.com/file/d/1Dg6RTowb1FNCu6sSHLHnrqE1QdvdFBhW/view?usp=sharing" }
+        ],
+        
+    },
+{
+        name: "SEMESTER-III",
+        units: [
+            { text: "Web Technologies(WT) ", url: "https://drive.google.com/file/d/16_-A5NiJC20ayvUZ1TZ8JStvUyPpw3hq/view?usp=sharing" },
+            { text: "Big Data Technologies(BDT)", url: "https://drive.google.com/file/d/1yc8vjttEhRrWQeo0TTmVINB0NzjTBcoO/view?usp=sharing" },
+            { text: "Devops & Agile Programmming(D&AP)", url: "https://drive.google.com/file/d/18d2qr2h9_lOjkn9-O1DxNY_UADAkcZJV/view?usp=sharing" },
+            { text:"Software Architecture & Design Patterns(SADP)", url: "https://drive.google.com/file/d/1odEoKshObIe3mnAEs_WR293LtPrfgeae/view?usp=sharing" },
+            { text: "Internet Of Things(IOT)", url: "https://drive.google.com/file/d/1BYaCkWPsO6uhKjVGLvEUokcsd9rzkBl4/view?usp=sharing" },
+            { text: "Web Technologies Laboratory", url: "https://drive.google.com/file/d/1x58wvhrUyf3rCNzMzOmS7kGGGB_CbMmj/view?usp=sharing" },
+            { text: "Big Data Technologies Laboratory", url: "https://drive.google.com/file/d/1ux74aHschwn3NyxdQDyMCEdhIuXnjTsU/view?usp=sharing" },
+            { text: "Devops & Agile Programmming Laboratory", url: "https://drive.google.com/file/d/1Z-smqjrA1t60k8SvF95xDUg_uETBNr5A/view?usp=sharing" },
+            { text: "SEMESTER-3(ALL SUBJECTS) Syllabus", url: "https://drive.google.com/file/d/1ks63VUhNimZw7FGymSfKU4AJJV8bZi4_/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "SEMESTER-IV",
+        units: [
+            { text: "Social Media Analysis(SMA)", url: "https://drive.google.com/file/d/184U5ySPvaVBb-gGnc5HYh734_Orjc4dt/view?usp=sharing" },
+            { text: "Cyber Laws(CL)", url: "https://drive.google.com/file/d/1N88_3ZeeQdD-_s9yMfwNwhwlMWE2rfrj/view?usp=sharing" },
+            { text: "SEMESTER-4(ALL SUBJECTS) Syllabus", url: "https://drive.google.com/file/d/10QSjWeVV_V2XySKl1ymvORy7RsShxLqy/view?usp=sharing" }
+        
+        ],
+        
+    },
+]);
+
+// Example for I Semester
+addSemesterListener("sem1-link", "I Semester Materials", [
+    {
+        name: "Mathematical Foundation Of Computer Science",
+        units: [
+            { text: "Unit 1(The Foundations Logic and Proof)", url: "https://drive.google.com/file/d/1q3WAdUpw9rSP1Og23PPFq965Mr_ykPxR/view?usp=sharing" },
+            { text: "Unit 2(Basic Structures, Sets, Functions, Sequences, Sums, Matrices and Relations)", url: "https://drive.google.com/file/d/1MZfBHaKp5WUW09T4sxqnZP9qUgf9yZfI/view?usp=sharing" },
+            { text: "Unit 3(Algorithms, Induction and Recursion)", url: "https://drive.google.com/file/d/1uuM_vCBfidmxF_hs9gH9igb2TQ6CRtt2/view?usp=sharing" },
+            { text: "Unit 4(Discrete Probability and Advanced Counting Techniques)", url: "https://drive.google.com/file/d/1mvceJdlUNSYLfSp-EeJyDbkz-E5HAw3q/view?usp=sharing" },
+            { text: "Unit 5(Graphs)", url: "https://drive.google.com/file/d/1qRh5qNMNKR-lopkqteb9wLZt8G-IMb3e/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1DNa1fAtZG8LoNzDQ9tBRMhZOczwppCsZ/view?usp=sharing" }
+        ],
+      
+    },
+    {
+        name: "Software Engineering(SE)",
+        units: [
+            { text: "Unit1(Basic concepts:)", url: "https://drive.google.com/file/d/1kXQCAjD-iVe0fRpI1n9UZXsj1UXaz1RW/view?usp=sharing" },
+            { text: "Unit 2(The nature of software:)", url: "https://drive.google.com/file/d/1JAmfuuyl4yNcAK31dqJMwTarfovNRZ3M/view?usp=sharing" },
+            { text: "Unit 3(Good Software Design, Cohesion and coupling, Control Hierarchy:)", url: "https://drive.google.com/file/d/19_YqwbWtUUZnuRNnKpzYvzEUDD2BgM9V/view?usp=sharing" },
+            { text: "Unit 4(Testing:)", url: "https://drive.google.com/file/d/1ceqssG6z3EGAlFEyq4tg3ZJiucpGi5AM/view?usp=sharing" },
+            { text: "Unit 5(Software reliability:)", url: "https://drive.google.com/file/d/1A3_UydxVqgi078gNhEAEQfMg9eqnG0Jt/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1FkPL8bPWEcHQn248tOY1pYNZXcirtK5C/view?usp=sharing" }
+        ],
+        
+    },
+{
+        name: "Computer Organization & Architecture(COA)",
+        units: [
+            { text: "Unit 1(Basic Structure of Computer:)", url: "https://drive.google.com/file/d/1HOn8gzy_eqonyv1vpNz1P6oCnBv3SfaA/view?usp=sharing" },
+            { text: "Unit 2(Arithmetic:)", url: "https://drive.google.com/file/d/1pvI3iw50mNzWWhs8WL3hhw2nZ5ip1vXB/view?usp=sharing" },
+            { text: "Unit 3(The Memory System:)", url: "https://drive.google.com/file/d/1eQAioxt7lTPCGKzv4tSSZNF46LjQgbdT/view?usp=sharing" },
+            { text: "Unit 4(Input/output Organization:)", url: "https://drive.google.com/file/d/15Gw1X-jyXmfliPGpzwamaOr1rQwDfjYt/view?usp=sharing" },
+            { text: "Unit 5(Pipelining:)", url: "https://drive.google.com/file/d/1MQVYZJlvBqIV0SflPI6xcqpIVD12SfPE/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1AFhvFrCww25YcgAUYJePK_LCpmNKmMdi/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "Data Structure(DS)",
+        units: [
+            { text: "Unit 1(Introduction to C Language:)", url: "https://drive.google.com/file/d/1xvUsZfAQJ0258SCj5KCn7Pv2bzexlkxY/view?usp=sharing" },
+            { text: "Unit 2(Data Structures:)", url: "https://drive.google.com/file/d/18lgAtVdxII5vGdT4Q2oBzbZVElRbomh0/view?usp=sharing" },
+            { text: "Unit 3(Linked Lists:)", url: "https://drive.google.com/file/d/1cktUnOvA--Xb-BZDQc-iEnC_REssppA5/view?usp=sharing" },
+            { text: "Unit 4(Trees:)", url: "https://drive.google.com/file/d/1XJucA2ULNStMcYrMkO0l_qsUVDc1VlL1/view?usp=sharing" },
+            { text: "Unit 5(Searching and Sorting:)", url: "https://drive.google.com/file/d/1hGg0KGMmRArLuLtR0GvkMDuuGEQSai2T/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1WWHXcyGGQX1xsMXynoufYoqXKUbXB3bd/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "Database Management System(DBMS)",
+        units: [
+            { text: "Unit 1(Introduction:)", url: "https://drive.google.com/file/d/15Tfmul7TWgepr0c6N_n9X_xpZur2OlTU/view?usp=sharing" },
+            { text: "Unit 2(Introduction to SQL:)", url: "https://drive.google.com/file/d/1eJI0UztqvS2VjmFzUqP3P7lj7JtN2_1M/view?usp=sharing" },
+            { text: "Unit 3(Database Design and the E-R Model:)", url: "https://drive.google.com/file/d/13OnXsu5NXtyuhm43yg5XEZX5Xbh-2GIo/view?usp=sharing" },
+            { text: "Unit 4(Query Processing:)", url: "https://drive.google.com/file/d/1B8iAFLYYQsd_A7fPS7ZwEOhayqWEtRrI/view?usp=sharing" },
+            { text: "Unit 5(Transaction Management:)", url: "https://drive.google.com/file/d/1mCo5LEBIjm7RGvJDyomYN_iLhF8VQimH/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1PsLuTjbOj_x8AYJ3eB6-MO_hR_c_QL8O/view?usp=sharing" }
+        ],
+      
+    },
+    {
+name: "Research Methodology and IPR(RM&IPR)",
+        units: [
+            { text: "Unit 1(Meaning of research problem)", url: "https://drive.google.com/file/d/1cr_a565_RCiBL0OzcuvtDi9vXO9BaP1D/view?usp=sharing" },
+            { text: "Unit 2(Effective literature studies approaches)", url: "https://drive.google.com/file/d/1LE89xpZg_x-J8KfPi1kMqmIDxGdPnUNm/view?usp=sharing" },
+            { text: "Unit 3(Nature of Intellectual Property:)", url: "https://drive.google.com/file/d/1BwotdExvBL_unCjDJfwFZ0J_watSi5LK/view?usp=sharing" },
+            { text: "Unit 4(Patent Rights:)", url: "https://drive.google.com/file/d/1QQXNfPKnp7_4RbyqhvaoEmrBMj5WOJ_Z/view?usp=sharing" },
+            { text: "Unit 5(New Developments in IPR:)", url: "https://drive.google.com/file/d/17KKLYYOUDVGXxcIGWVznWsrMlM8OqfN9/view?usp=sharing" },
+            { text: "Total Units PDF",url: "https://drive.google.com/file/d/1D3qF5o2nYWFIu5ndMntb_wUpLt7FKrwf/view?usp=sharing" }
+        ],
+      
+    },    
+]);
+// Example for II Semester
+addSemesterListener("sem2-link", "II Semester Materials", [
+    {
+        name: "Operating System(OS)",
+        units: [
+            { text: "Unit 1(Operating Systems Overview:)", url: "https://drive.google.com/file/d/1f5vttziQ1E4yIKfRWbwaPXTBLRK9_9RX/view?usp=sharing" },
+            { text: "Unit 2(Process Concept:)", url: "https://drive.google.com/file/d/1S9vva9E4L8nthQl9Fq9ggeWf8BVKxoLa/view?usp=sharing" },
+            { text: "Unit 3(Memory-Management Strategies:)", url: "https://drive.google.com/file/d/1wu4iCBS4XDCOTiqJv1axRvrQs16-v_Xe/view?usp=sharing" },
+            { text: "Unit 4(Deadlocks:)", url: "https://drive.google.com/file/d/1QQXNfPKnp7_4RbyqhvaoEmrBMj5WOJ_Z/view?usp=sharing" },
+            { text: "Unit 5(System Protection:)", url: "https://drive.google.com/file/d/15azrxKM6Lwxcuuhla803UjZgoMN91o5I/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1D3qF5o2nYWFIu5ndMntb_wUpLt7FKrwf/view?usp=sharing" }
+        ],
+      
+    },
+    {
+        name: "Data Science With Python(DSP)",
+        units: [
+            { text: "Unit 1(Descriptive Statistics:)", url: "https://drive.google.com/file/d/15kXI33t-Rwt75s20k6KlOlI1ug6szSy9/view?usp=sharing" },
+            { text: "Unit 2(Data Visualization:)", url: "https://drive.google.com/file/d/1gxDz3s6PKHhRe0XP9Z4EpVFJDJCN423W/view?usp=sharing" },
+            { text: "Unit 3(Patterns,)", url: "https://drive.google.com/file/d/19RRTO6_7EzMg__mldjudP_Znw9iwUFI-/view?usp=sharing" },
+            { text: "Unit 4(Multilayer perceptron.)", url: "https://drive.google.com/file/d/1v4VKiERwPs2SBn4hg8aBsXltSnUAv6P5/view?usp=sharing" },
+            { text: "Unit 5(Applications to text,)", url: "https://drive.google.com/file/d/1Xn2NJzoQEKwrT9i5fvdX48xWukwRadhE/view?usp=sharing" },
+            { text: "Total units PDF", url: "https://drive.google.com/file/d/1BaERAH34EOwP-fgikRe4US7fGzXLU8J_/view?usp=sharing" }
+        ],
+    },
+{
+        name: "Computer Networks(CN)",
+        units: [
+            { text: "Unit 1(Internet)", url: "https://drive.google.com/file/d/1vDV8C4suKH8QUnz962w4ERGyGuk25ouT/view?usp=sharing" },
+            { text: "Unit 2(Principles of Network Applications)", url: "https://drive.google.com/file/d/1QGf1PXRspnh46zb0uqIutqpPxaBLmOJh/view?usp=sharing" },
+            { text: "Unit 3(Introduction and Transport-Layer Services)", url: "https://drive.google.com/file/d/1rbGe-HgzcK40zTr0VxuGz-oAyZ2VbE-c/view?usp=sharing" },
+            { text: "Unit 4(Introduction, Virtual Circuit)", url: "https://drive.google.com/file/d/1Fg01BbnYsJz0HZNm_IntIAFZk78Bcx02/view?usp=sharing" },
+            { text: "Unit 5(Introduction to the Link Layer)", url: "https://drive.google.com/file/d/1eDhIQz-ZkwEXMRkSA9ziydr7PvlHPmGt/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1vT4EHSeQIhxANTnGzuV1AbDl7iDVrCUY/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "Software Testing Methodologies(STM)",
+        units: [
+            { text: "Unit 1(Introduction:)", url: "https://drive.google.com/file/d/1rAd5YvswCDzI14VRVdPJIwdELdklxtXu/view?usp=sharing" },
+            { text: "Unit 2(Transaction Flow Testing:)", url: "https://drive.google.com/file/d/1Tu_e7HcD1zqb9p44wBZ5Wc2HkGzbbyS1/view?usp=sharing" },
+            { text: "Unit 3(Paths, Path products and Regular expressions:)", url: "https://drive.google.com/file/d/1VRJ3aOrDqJCAS1m8Ypr4VO5lg3KP0cn_/view?usp=sharing" },
+            { text: "Unit 4(State, State Graphs and Transition testing:)", url: "https://drive.google.com/file/d/1bWPSWk2vT65I_z-_pkHfubbHMGIdufE1/view?usp=sharing" },
+            { text: "Unit 5(Graph Matrices and Application:)", url: "https://drive.google.com/file/d/1yMB48gYaoKTPt3CIIEITz1aBFuEEtkcp/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1HaBLtlWWMzCaRMJ0Md3ZSdu7tPHNhOjU/view?usp=sharing" }
+        ],
+      
+    },
+{    
+
+name: "Cloud Computing(CC)",
+        units: [
+            { text: "Unit 1(Introduction to cloud computing:)", url: "https://drive.google.com/file/d/11D7ur-IhXtEGhSx18uKh6ZfqmIdbXMxq/view?usp=sharing" },
+            { text: "Unit 2(Hadoop&MapReduce:)", url: "https://drive.google.com/file/d/1egk-Ra-YiLJyOSHUAFaOYHxOu7ivPW3V/view?usp=sharing" },
+            { text: "Unit 3(Python for Cloud:)", url: "https://drive.google.com/file/d/1JWNT37BQnc7OmuAmBkaF45Tja6MABuMV/view?usp=sharing" },
+            { text: "Unit 4(Big Data Analytics:)", url: "https://drive.google.com/file/d/1kSbkgyRphjwe1BzETnP9WD5fOgcS4R72/view?usp=sharing" },
+            { text: "Unit 5(Cloud Security:)", url: "https://drive.google.com/file/d/1uCaux5FZZ5kkdBBhj-hvnK8Q15xEbUM_/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1liO6fZs-0zblMpmApmj5zPp6UcOlEyuJ/view?usp=sharing" }
+        ],
+      
+    },
+{    
+
+name: "Exploratory Data Analytics With Python(EDAP)",
+        units: [
+            { text: "Unit 1(Python Fundamentals)", url: "https://drive.google.com/file/d/1HbpwDI5I8nbPtOSjAebEOVq_Py132HDK/view?usp=sharing" },
+            { text: "Unit 2(Dataset:)", url: "https://drive.google.com/file/d/1WKKUDwWcJ3U_A-OsJd2kdTrUOLlJ60KT/view?usp=sharing" },
+            { text: "Unit 3(Data Processing and Visualization Data Formatting)", url: "https://drive.google.com/file/d/15oqKbwZZPErXEK5K01cOmUxU8LYrHnmI/view?usp=sharing" },
+            { text: "Unit 4(Mathematical and Scientific applications for Data Analysis)", url: "https://drive.google.com/file/d/1t32GU6rb4bzXAiAUiCpxnVeWjpZaWFab/view?usp=sharing" },
+            { text: "Unit 5(Analysing Web Data wrangling,)", url: "https://drive.google.com/file/d/1CGqRU_oIDq8DPtFmhAXxTGHvKVGMhFAs/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1VwTf_xKoRm37LpiyRoxhS4cRWCA0Q-sY/view?usp=sharing" }
+        ],
+      
+    },    
+]);
+// Example for III Semester
+addSemesterListener("sem3-link", "III Semester Materials", [
+    {
+        name: "Web Technologies(WT)",
+        units: [
+            { text: "Unit 1(Introduction to PHP:)", url: "https://drive.google.com/file/d/1iLXKiMapMZ8wQpcT_sX4SEOHL9ZK92py/view?usp=sharing" },
+            { text: "Unit 2(XML:)", url: "https://drive.google.com/file/d/16VBO7Xm8aDhoC9Yy-gKwv5pcVQgH55L6/view?usp=sharing" },
+            { text: "Unit 3(Introduction to Servlets:)", url: "https://drive.google.com/file/d/1v_iqS0rDO6Aytdw4kUK48cogWFUTW0HX/view?usp=sharing" },
+            { text: "Unit 4(Introduction to JSP:)", url: "https://drive.google.com/file/d/1nxhlOq7pyYIY1DmNyVzu_K45x1g5aMUD/view?usp=sharing" },
+            { text: "Unit 5(Client-side Scripting:)", url: "https://drive.google.com/file/d/1RdywqBYpM8w3GAbtaPqT20ZaDkUP2XD_/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/10VIzpvY154dsXt0Sd0bLBFr95K87dHJD/view?usp=sharing" }
+        ],
+      
+    },
+    {
+        name: "Big Data Technologies(BDT)",
+        units: [
+            { text: "Unit 1(What is big data,)", url: "https://drive.google.com/file/d/1gvZdb17QXFzmyDXDI9Jw5bgA5FK0mIH5/view?usp=sharing" },
+            { text: "Unit 2(Introduction to NoSQL)", url: "https://drive.google.com/file/d/1-C40GUydsJ899t1sMLbQquWQtK3mjcIy/view?usp=sharing" },
+            { text: "Unit 3(Data format)", url: "https://drive.google.com/file/d/1YrfX0yjOHAwI76DHAVE3xado3ujSOXx8/view?usp=sharing" },
+            { text: "Unit 4(MapReduce workflows)", url: "https://drive.google.com/file/d/1TZk5IALMubN6AigRtnHJw8hiVNjq7bu1/view?usp=sharing" },
+            { text: "Unit 5(Hbase)", url: "https://drive.google.com/file/d/114oX-5yHLyIdsADrWE1UsOGFmAk0A8MK/view?usp=sharing" },
+            { text: "Total units PDF", url: "https://drive.google.com/file/d/1cAxqatkQLkWRIGw7wuud7B8qE75U8KVN/view?usp=sharing" }
+        ],
+        
+    },
+{
+        name: "Devops & Agile Programmming(D&AP)",
+        units: [
+            { text: "Unit 1(Agile)", url: "https://drive.google.com/file/d/1pCT9x4z3qQh37ZxsFYr6AU1vVlW183iZ/view?usp=sharing" },
+            { text: "Unit 2(Releasing-Done)", url: "https://drive.google.com/file/d/1XMoJ4ek6t1zln364Wo2pT_zf-YDs8oxu/view?usp=sharing" },
+            { text: "Unit 3(Developing-Incremental)", url: "https://drive.google.com/file/d/1Np4L07YIAz_RwY-8FKCBXxt0SMLzFEKC/view?usp=sharing" },
+            { text: "Unit 4(DEIFINITION & PURPOSE OF DEVOPS:)", url: "https://drive.google.com/file/d/15MgzrpmwWG0kncPRxdr97Lx-Loh6xAHK/view?usp=sharing" },
+            { text: "Unit 5(CAMS (CULTURE, AUTOMATION, MEASUREMENT AND SHARING):)", url: "https://drive.google.com/file/d/1NDvt3mibnnW7Muh4wH_AaKkmwwz3IpDt/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/12jifTWZnpQYp6atT45xyqNkBOmAxDidi/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "Software Architecture & Design Patterns(SADP)",
+        units: [
+            { text: "Unit 1(Envisioning Architecture)", url: "https://drive.google.com/file/d/11D1ZvULsiRy1_AUe8y3g77imJkjAiH--/view?usp=sharing" },
+            { text: "Unit 2(Analyzing Architectures)", url: "https://drive.google.com/file/d/1DBAuw2bSljOrKjJy0gNSdRBotlKADaf3/view?usp=sharing" },
+            { text: "Unit 3(Patterns Pattern Description)", url: "https://drive.google.com/file/d/1kVN2x5_3-DxN1Cr6KwPtypIoaoy7AWcL/view?usp=sharing" },
+            { text: "Unit 4(Behavioral Patterns Chain of responsibility)", url: "https://drive.google.com/file/d/1afDw9jlK1mS0LERN6Nr8x8ixrFT1lsME/view?usp=sharing" },
+            { text: "Unit 5(Case Studies A-7E –)", url: "https://drive.google.com/file/d/1RRbYb3Gueuvz0AVa2G4ALowbrYJVj2Ob/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1r7QW3rzmjsRrlc-Hm0Ctv_8uGifjYIfx/view?usp=sharing" }
+        ],
+      
+    },
+{
+name: "Internet Of Things(IOT)",
+        units: [
+            { text: "Unit 1(Overview of IoT:)", url: "https://drive.google.com/file/d/1k-ixKj3RjjQhZf1YhbMyj6tQJB_UH6r_/view?usp=sharing" },
+            { text: "Unit 2(Embedded Devices:)", url: "https://drive.google.com/file/d/1Nlo-5dkcG3lL4Czt3KeSVXfmwilrPd-K/view?usp=sharing" },
+            { text: "Unit 3(Communication in the IoT:)", url: "https://drive.google.com/file/d/1gnyri00tM_YpFu49F6Z1X0NZp1XgwL2z/view?usp=sharing" },
+            { text: "Unit 4(Business Models:)", url: "https://drive.google.com/file/d/1WPSs4lEn7OBtWZowSx4tLNy2JVJsLTZM/view?usp=sharing" },
+            { text: "Unit 5(Manufacturing continued:)", url: "https://drive.google.com/file/d/1BZ5mE_gMndfGsj7lrxoMi6u5slIDNiIV/view?usp=sharing" },
+            { text: "Total Units PDF", url: "https://drive.google.com/file/d/1ZqM5Co2-wWHIkwHRld0nvrN8crGuBIUT/view?usp=sharing" }
+        ],
+      
+    },    
+
+]);
+// Example for IV Semester
+addSemesterListener("sem4-link", "IV Semester Materials", [
+    {
+        name: "Social Media Analysis",
+        units: [
+            { text: "Unit 1(Introduction to Web)", url: "https://drive.google.com/file/d/1eQqHYHd7jVbWFsym23dlOo_frQV6QSnT/view?usp=sharing" },
+            { text: "Unit 2(Ontology and their role in the Semantic Web)", url: "https://drive.google.com/file/d/19laJIWi68RWv2W_mmV8vAaTpmoMs10Rl/view?usp=sharing" },
+            { text: "Unit 3(Extracting evolution of Web Community from a Series of WebArchive)", url: "" },
+            { text: "Unit 4(Understanding and Predicting Human Behavior for SocialCommunities)", url: "" },
+            { text: "Unit 5(Trust in Online Environment)", url: "" },
+            { text: "Total Units PDF", url: "" }
+        ],
+      
+    },
+    {
+        name: "Cyber Law",
+        units: [
+            { text: "Unit 1(Conceptual and theoretical perspective of Cyber Law)", url: "https://drive.google.com/file/d/17WN2NlBNtPHTe680dhyzcwUdwZbfgcp1/view?usp=sharing" },
+            { text: "Unit 2(Jurisdiction issues in Transactional Crimes Cyber Law)", url: "https://drive.google.com/file/d/1_MqJlGsWGb-HoY3z_18-5Sy3fxEwSIIS/view?usp=sharing" },
+            { text: "Unit 3(Cyber Law and IPR, Understanding Copyright in Information Technology,)", url: "https://drive.google.com/file/d/1Zj6aI2tBO8slaYfdE9TeRF7Vuoj2bIlm/view?usp=sharing" },
+            { text: "Unit 4(E-Commerce)", url: "" },
+            { text: "Unit 5(Information Technology Act 2000,)", url: "https://drive.google.com/file/d/1qwf1wC4FXqR3pWjP_lUzLFpCK97M3h3r/view?usp=sharing" },
+            { text: "Total Units PDF", url: "" }
+        ],
+        
+    },
+
+]);
+addSemesterListener("Model Papers-link", "All Semesters Model Papers.", [
+    {
+        name: "SEMESTER-I",
+        units: [
+            { text: "Mathematical Foundation Of Computer Science(MFCS)", url: "https://drive.google.com/file/d/1jmOOF0fEOBYqJudlNf5JtD6sWfdCeP2E/view?usp=sharing" },
+            { text: "Software Engineering(SE)", url: "https://drive.google.com/file/d/1LtFnICZqHhNsPPmZRMSErBW_ghyVFmNd/view?usp=sharing" },
+            { text: "Computer Organization & Architecture(COA)", url: "https://drive.google.com/file/d/1O5YVQpVCZht-RcHBPi8vK17VC1CbL0Z8/view?usp=sharing" },
+            { text: "Data Structure(DS)", url: "" },
+            { text: "Database Management System(DBMS)", url: "https://drive.google.com/file/d/1C8gvAoDOTfpZKmrbtUCIGKrPdM8oDL22/view?usp=sharing" },
+            { text: "Research Methodology and IPR(RM&IPR)", url: "https://drive.google.com/file/d/1A35Y9CggP53QWl8P9csYMSE5blcXX52e/view?usp=sharing" }
+            
+        ],
+        
+    },
+    {
+        name: "SEMESTER-II",
+        units: [
+            { text: "Operating System(OS)", url: "https://drive.google.com/file/d/1fPhNtZcqrZeWDPFe8lEDQfTmuN5ATfcx/view?usp=sharing" },
+            { text: "Data Science With Python(DSP)", url: "https://drive.google.com/file/d/1PDoQxzOhY1Tb3guAjpDh9gVpGqCA0_vv/view?usp=sharing" },
+            { text: "Computer Networks(CN)", url: "https://drive.google.com/file/d/1H8P4u6gAU-dczAiDAh_hMBzuhBjHOjld/view?usp=sharing" },
+            { text: "Software Testing Methodologies(STM)", url: "https://drive.google.com/file/d/1MxKTDngxP8ojUhzNfqa1iAJCEZv96z1m/view?usp=sharing" },
+            { text: "Cloud Computing(CC)", url: "https://drive.google.com/file/d/1s-vK-KDNQo30I-n-bL9Ip4hjd9XVL3ZW/view?usp=sharing" }
+            
+        ],
+        
+    },
+{
+        name: "SEMESTER-III",
+        units: [
+            { text: "Web Technologies(WT) ", url: "https://drive.google.com/file/d/1nIIog6CuE9BZQ8xpDgpdu4y8xc2qKEJE/view?usp=sharing" },
+            { text: "Big Data Technologies(BDT)", url: "https://drive.google.com/file/d/1fRu3Gjc8a_CE7eY_nLXssQzkJcV2yv1n/view?usp=sharing" },
+            { text: "Devops & Agile Programmming(D&AP)", url: "https://drive.google.com/file/d/1INZOKRTo6rBvisvmVxlCEmkegr5jhgGI/view?usp=sharing" },
+            { text:"Software Architecture & Design Patterns(SADP)", url: "https://drive.google.com/file/d/1upi3t0tm5uyD6bYKJMMm9BhavM3nsQ-b/view?usp=sharing" },
+            { text: "Internet Of Things(IOT)", url: "" }
+            
+        ],
+      
+    },
+{
+name: "SEMESTER-IV",
+        units: [
+            { text: "Social Media Analysis(SMA)", url: "https://drive.google.com/file/d/151TQUft9lGC1TYkwo3jf7LQrl61OvbRd/view?usp=sharing" },
+            { text: "Cyber Laws(CL)", url: "" }
+            
+        
+        ],
+        
+    },
+]);
+// Similarly, add specific URLs for II, III, and IV Semesters
+
+            addSemesterListener("syllabus-link", "I Semester Materials");
+            addSemesterListener("sem1-link", "I Semester Materials");
+            addSemesterListener("sem2-link", "II Semester Materials");
+            addSemesterListener("sem3-link", "III Semester Materials");
+            addSemesterListener("sem4-link", "IV Semester Materials");
+            addSemesterListener("Model Papere-link", "All Semester Model Papers");
+        });
+        
+    
+    </script>
+
+<!-- <div style="text-align: center; margin-top: 20px;">
+    <a href="semprepcorner5_updated.html" style="padding: 10px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Previous</a>
+    <a href="semprepcorner5_updated.html#" style="padding: 10px; background: #28A745; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">Next</a>
+</div> -->
+
+</body>
+</html>
